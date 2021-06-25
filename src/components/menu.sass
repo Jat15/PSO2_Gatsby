@@ -1,0 +1,41 @@
+.accordion
+  color: white
+  padding: 0
+  background: #333
+  border-radius: 3px
+  overflow: hidden
+  margin: 0px
+  ul
+    margin: 0px
+    padding: 0px
+  li
+    display: block
+  label
+    cursor: pointer
+    display: block
+    padding: 0.7em 1em
+    overflow: hidden
+    background: linear-gradient(#3a6c9b,#4180ae)
+    border: 1px solid #5387b3
+    box-shadow: inset 0 1px 1px rgba(#fff,0.2)
+    &:hover
+      background: linear-gradient(#666,#444)
+  input[type="radio"]
+    display: none
+  .sub > li
+    cursor: pointer
+    overflow: hidden
+    height: 0
+    margin: 0
+    opacity: 0
+    font-size: 0.875em
+    background: #222d37
+    transition: all 0.25s ease-in-out
+    box-shadow: inset 0 -1px 0 #555
+    &:hover
+      padding-left: 1.5em
+      background: rgba(0,0,0,0.1)
+  input:checked + .sub > li
+    padding: 0.7em 1em
+    height: 1.4em
+    opacity: 1
