@@ -1,0 +1,13 @@
+---
+
+type: Article
+
+titre: Sortie de L'Episode 5
+
+img: ../images/PSO2_Episode_5.png
+
+date: 2020/09/30
+
+---
+
+Au 30 Septembre 2020 nous avons la bonne grande joie de recevoir la mise a jours de l'episode 5 avec la Classe heros
