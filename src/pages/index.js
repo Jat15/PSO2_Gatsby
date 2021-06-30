@@ -8,16 +8,13 @@ import "./index.sass"
 
 
 const IndexPage = ({data}) => {
-    
-
-    const listArticle =data.allMarkdownRemark.nodes.map( objet => {
+    const listArticle =data.articles.nodes.map( objet => {
         const image = getImage(objet.frontmatter.img)
 
         return <div className="cardArticle">
             <h1>{objet.frontmatter.titre}</h1>
-            <GatsbyImage image={image} alt={`Banniére de l'articles ${objet.frontmatter.titre}` } />
+            <GatsbyImage image={image} alt={`Bannière de l'article ${objet.frontmatter.titre}` } />
             <div>
-
                 <div
                     dangerouslySetInnerHTML={{ __html: objet.html }}
                 />
@@ -25,9 +22,20 @@ const IndexPage = ({data}) => {
         </div>
     })
 
+    const aLaUne = data.aLaUne.nodes[0]
+    const aLaUneImage = getImage(aLaUne.frontmatter.img)
+
     return (
         <Layout>
-            <Seo title="Home" />
+            <Seo title="Phantasy Star Chronique - Les Sortie" />
+            <h1>{aLaUne.frontmatter.titre}</h1>
+            <GatsbyImage image={aLaUneImage} alt={`Bannière de l'article ${aLaUne.frontmatter.titre}` } />
+            <div>
+                <div
+                    dangerouslySetInnerHTML={{ __html: aLaUne.html }}
+                />
+            </div>
+
             <div className="containerArticles">
                 {listArticle}
             </div>
@@ -37,14 +45,37 @@ const IndexPage = ({data}) => {
 
 export const query = graphql`
     query{
-        allMarkdownRemark(
-            filter: {frontmatter: {type: {eq: "Article"}}}
-            sort: { fields: [frontmatter___date], order: DESC} 
+        aLaUne: allMarkdownRemark(
+            filter: {frontmatter: {type: {eq: "News"}}}
+            sort: { fields: [frontmatter___date], order: DESC}
+            limit: 1
         ) {
             nodes {
                 html
                 frontmatter {
-                    titre
+                    title
+                    type
+                    img{
+                        childImageSharp {
+                            gatsbyImageData(
+                                placeholder: BLURRED
+                                width: 720
+                                formats: [AUTO, WEBP, AVIF]
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        articles: allMarkdownRemark(
+            filter: {frontmatter: {type: {eq: "News"}}}
+            sort: { fields: [frontmatter___date], order: DESC}
+            skip: 1
+        ) {
+            nodes {
+                html
+                frontmatter {
+                    title
                     type
                     img{
                         childImageSharp {
