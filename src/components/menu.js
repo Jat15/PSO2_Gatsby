@@ -1,43 +1,71 @@
 import * as React from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
+
 
 import "./menu.sass"
 
-const Menu = ({ siteTitle }) => (
-<ul class="accordion">
-  <li class="has-sub">
-    <label for="menu1">Menu principal</label><input id="menu1" name="menu" type="radio" />
-    <ul class="sub">
-      <li>
-        <a>Home</a>
+const Menu = ({ siteTitle }) => {
+
+  const data = useStaticQuery(graphql`
+    query {
+      allMarkdownRemark(
+        sort: {fields: [frontmatter___dateReleaseGame, frontmatter___orderSubMenu], order: [DESC, ASC]}
+        filter: {fields: {slug: {ne: null}}}
+      ) {
+        nodes {
+          id
+          frontmatter {
+            game
+            title
+          }
+          fields {
+            slug
+          }
+        }
+      }
+    }
+
+  `)
+
+  let oldMenu
+
+  const menu = data.allMarkdownRemark.nodes.map( section => {
+
+    const newMenu = section.frontmatter.game
+
+    if (newMenu !== oldMenu){
+      const submenu =data.allMarkdownRemark.nodes.map( 
+        categorie => { 
+          
+          if (section.frontmatter.game === categorie.frontmatter.game) {
+            return(
+            <li>
+              <Link to={"/"+categorie.fields.slug}>
+                {categorie.frontmatter.title}
+              </Link>
+            </li>
+            )
+          }
+      })
+    
+      oldMenu = newMenu
+      
+      return <li className="has-sub">
+        <label htmlFor={section.id}>{section.frontmatter.game}</label><input id={section.id} name="menu" type="radio" />
+        <ul className="sub">
+          {submenu}
+        </ul>
       </li>
-      <li>
-        <Link to="https://discord.gg/48H8Fq8">Discord</Link>
-      </li>
-      <li>
-        <a>Forum</a>
-      </li>
+    }
+  })
+
+  return( 
+    <ul className="accordion">
+      {menu}
     </ul>
-  </li>
-  <li class="has-sub">
-    <label for="menu2">Phantasy Star</label><input id="menu2" name="menu" type="radio" />
-    <ul class="sub">
-      <li>
-        <a>Phantasy Star I-IV</a>
-      </li>
-    </ul>
-  </li>
-  <li class="has-sub">
-    <label for="menu3">Phantasy Star Online</label><input id="menu3" name="menu" type="radio" />
-    <ul class="sub">
-      <li>
-        <a>Présentation</a>
-      </li>
-    </ul>
-  </li>
-</ul>
-)
+  )
+}
 
 /*
 Header.propTypes = {
