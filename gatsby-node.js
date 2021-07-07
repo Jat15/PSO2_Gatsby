@@ -10,51 +10,62 @@ const path = require("path")
 
 
 
-exports.onCreateNode = ({ node, getNode, actions }) => {
+exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
     const { createNodeField } = actions
     if (node.internal.type === `MarkdownRemark` && node.frontmatter.type === `PageGame`) {
 
-    const slugify = str =>
-    str
-        .toLowerCase()
-        .trim()
-        .replace(/[\s_-]+/g, '-')
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      const slugify = str =>
+        str
+            .toLowerCase()
+            .trim()
+            .replace(/[\s_-]+/g, '-')
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")     
 
-      const slug = slugify(node.frontmatter.game + '/' +  node.frontmatter.title)
-      createNodeField({
-        node,
-        name: `slug`,
-        value: slug,
-      })
+        const slug = slugify(node.frontmatter.route.join('/') + '/' +  node.frontmatter.title)
+
+        actions.createNode({
+          id: createNodeId(slug),
+          slug: slug,
+          markdownId: node.id,
+          parent: createNodeId(node.frontmatter.route[0]),
+          internal: {
+            type: "SubTab",
+            contentDigest: node.internal.contentDigest,
+          },
+        })
+
+
     }
-  }
 
-
-  exports.createPages = async ({ graphql, actions }) => {
-    const { createPage } = actions
-    const result = await graphql(`
-      query {
-        allMarkdownRemark(filter: {fields: {slug: {ne: null}}}) {
-            edges {
-              node {
-                fields {
-                  slug
-                }
-              }
-            }
-          }
-      }
-    `)
-
-
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-      createPage({
-        path: node.fields.slug,
-        component: path.resolve(`./src/templates/normal.js`),
-        context: {
-          slug: node.fields.slug,
+    if (node.internal.type === "MarkdownRemark" && node.frontmatter.type === "Tab") {
+      actions.createNode({
+        id: createNodeId(node.frontmatter.title),
+        markdownId: node.id,
+        internal: {
+          type: "Tab",
+          contentDigest: node.internal.contentDigest,
         },
       })
-    })
+    }
+
+  }
+
+  exports.createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions
+    const typeDefs = `
+      type Tab implements Node {
+        id: ID!
+        markdownId: ID!
+        markdownPage: MarkdownRemark @link(by: "id" from: "markdownId")
+        subTabs: [SubTab] @link(by: "parent.id" from: "id")
+      }
+      type SubTab implements Node {
+        id: ID! 
+        slug: String!
+        markdownId: ID!
+        markdownPage: MarkdownRemark @link(by: "id" from: "markdownId")
+        subTabs: [SubTab] @link(by: "parent.id" from: "id")
+      }
+    `
+    createTypes(typeDefs)
   }
