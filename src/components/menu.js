@@ -9,17 +9,17 @@ import "./menu.sass"
 const Menu = ({ siteTitle }) => {
 
   const data = useStaticQuery(graphql`
-    query {
-      allMarkdownRemark(
-        sort: {fields: [frontmatter___dateReleaseGame, frontmatter___orderSubMenu], order: [DESC, ASC]}
-        filter: {fields: {slug: {ne: null}}}
-      ) {
-        nodes {
-          id
+    query{
+    allTab(
+      sort: {fields: [markdownPage___frontmatter___dateReleaseGame], order: [DESC]}
+    ) {
+      nodes {
+        id
+        markdownPage {
           frontmatter {
-            game
             title
-            logoGame{
+            date
+            logo{
               childImageSharp {
                 gatsbyImageData(
                     placeholder: BLURRED
@@ -29,59 +29,52 @@ const Menu = ({ siteTitle }) => {
               }
             }
           }
-          fields {
-            slug
-          }
+        }
+        subTabs {
+          ...test
         }
       }
     }
+  }
 
-  `)
-
-  let oldMenu
-
-  const menu = data.allMarkdownRemark.nodes.map( section => {
-
-    const newMenu = section.frontmatter.game
-
-    if (newMenu !== oldMenu){
-      const submenu =data.allMarkdownRemark.nodes.map( 
-        categorie => { 
-          
-          if (section.frontmatter.game === categorie.frontmatter.game) {
-            return(
-            <li >
-              <Link to={"/"+categorie.fields.slug}>
-                {categorie.frontmatter.title}
-              </Link>
-            </li>
-            )
-          }
-      })
-    
-      oldMenu = newMenu
-      
-      const logoGame = section.frontmatter.logoGame? getImage(section.frontmatter.logoGame): false
-
-
-      return <li className="has-sub ">
-        <div className="button-default button-slanted">
-          <label htmlFor={section.id} className="button-slanted-content">
-            {
-        
-              logoGame?
-                <GatsbyImage image={logoGame} alt={`Logo ${section.frontmatter.game}` } />
-                :section.frontmatter.game
-        
-            }
-          </label>
-        </div>
-        <input id={section.id} name="menu" type="radio" />
-        <ul className="sub">
-          {submenu}
-        </ul>
-      </li>
+  fragment test on SubTab {
+    slug
+    markdownPage {
+      frontmatter {
+        title
+      }
     }
+  }
+  `)
+  
+
+  const menu = data.allTab.nodes.map( tab => {
+
+    const submenu = tab.subTabs.map( subTab =>
+      <li>
+        <Link to={"/"+ subTab.slug}>
+          {subTab.markdownPage.frontmatter.title}
+        </Link>
+      </li>
+    )
+    const logo = tab.markdownPage.frontmatter.logo ? getImage(tab.markdownPage.frontmatter.logo): false
+
+    return <li className="has-sub ">
+      <div className="button-default button-slanted">
+        <label htmlFor={tab.id} className="button-slanted-content">
+          {
+            logo?
+              <GatsbyImage image={logo} alt={`Logo ${tab.markdownPage.frontmatter.title}` } />
+              :tab.markdownPage.frontmatter.title
+      
+          }
+        </label>
+      </div>
+      <input id={tab.id} name="menu" type="radio" />
+      <ul className="sub">
+        {submenu}
+      </ul>
+    </li>
   })
 
   return(
