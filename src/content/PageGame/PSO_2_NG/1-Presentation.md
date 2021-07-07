@@ -1,14 +1,8 @@
 ---
 
-type: PageGame
-
-game: Phantasy Star Online 2 New Genesis
-
 route: [Phantasy Star Online 2 New Genesis]
 
-dateReleaseGame: 2021-02-09
-
-logoGame: ../../../images/Logo_PSO2NG.png
+type: PageGame
 
 layout: Normal
 

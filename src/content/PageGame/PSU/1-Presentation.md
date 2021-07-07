@@ -1,12 +1,6 @@
 ---
 
-game: Phantasy Star Universe
-
 route: [Phantasy Star Universe]
-
-dateReleaseGame: 2006-08-31
-
-logoGame: ../../../images/logo_PSU.webp
 
 type: PageGame
 

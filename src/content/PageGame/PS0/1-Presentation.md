@@ -1,11 +1,6 @@
 ---
 
-game: Phantasy Star Zero
-
 route: [Phantasy Star Zero]
-
-
-dateReleaseGame: 2006-08-31
 
 type: PageGame
 

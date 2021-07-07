@@ -1,10 +1,6 @@
 ---
 
-game: Phantasy Star
-
 route : [Phantasy Star]
-
-dateReleaseGame: 1987-12-20
 
 type: PageGame
 

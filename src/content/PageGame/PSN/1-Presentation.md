@@ -1,10 +1,6 @@
 ---
 
-game: Phantasy Star Nova
-
 route: [Phantasy Star Nova]
-
-dateReleaseGame: 2009-12-03
 
 type: PageGame
 

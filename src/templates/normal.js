@@ -5,7 +5,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import "./normal.sass"
-
+/*
 const Pages = ({data}) =>{
     const image = getImage(data.markdownRemark.frontmatter.img) 
 
@@ -48,3 +48,4 @@ export const query = graphql`
 `
 
 export default Pages
+*/

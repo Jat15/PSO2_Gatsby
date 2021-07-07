@@ -1,10 +1,6 @@
 ---
 
-game: Phantasy Star Portable
-
 route: [Phantasy Star Portable]
-
-dateReleaseGame: 2008-12-25
 
 type: PageGame
 
