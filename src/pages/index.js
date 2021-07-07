@@ -8,12 +8,12 @@ import "./index.sass"
 
 
 const IndexPage = ({data}) => {
-    const listArticle =data.articles.nodes.map( objet => {
+    const listArticle = data.articles.nodes.map( objet => {
         const image = getImage(objet.frontmatter.img)
 
-        return <div className="cardArticle">
-            <h1>{objet.frontmatter.titre}</h1>
-            <GatsbyImage image={image} alt={`Bannière de l'article ${objet.frontmatter.titre}` } />
+        return <div className="cardArticle borderCian" key={objet.id} >
+            <h1>{objet.frontmatter.title}</h1>
+            <GatsbyImage image={image} className="borderCian" alt={`Bannière de l'article ${objet.frontmatter.titre}` } />
             <div>
                 <div
                     dangerouslySetInnerHTML={{ __html: objet.html }}
@@ -28,14 +28,15 @@ const IndexPage = ({data}) => {
     return (
         <Layout>
             <Seo title="Phantasy Star Chronique - Les Sortie" />
-            <h1>{aLaUne.frontmatter.titre}</h1>
-            <GatsbyImage image={aLaUneImage} alt={`Bannière de l'article ${aLaUne.frontmatter.titre}` } />
-            <div>
-                <div
-                    dangerouslySetInnerHTML={{ __html: aLaUne.html }}
-                />
+            <div className="borderCian aLaUne">
+                <h1>{aLaUne.frontmatter.title}</h1>
+                <GatsbyImage image={aLaUneImage} className="borderCian"  alt={`Bannière de l'article ${aLaUne.frontmatter.titre}` } />
+                <div>
+                    <div
+                        dangerouslySetInnerHTML={{ __html: aLaUne.html }}
+                    />
+                </div>
             </div>
-
             <div className="containerArticles">
                 {listArticle}
             </div>
@@ -52,6 +53,7 @@ export const query = graphql`
         ) {
             nodes {
                 html
+                id
                 frontmatter {
                     title
                     type
