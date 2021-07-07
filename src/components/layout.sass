@@ -1,28 +1,83 @@
-
-html
-  overflow-y: none
-
 body 
-  background: url("https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260")
-  background-size: cover
+  color: white
+  min-height: 100vh
+  margin:0px
+.imageBackground
+  min-height: 100vh
+  padding: 8px
+
+
+
 
 .container
+  max-width: 100%
+  margin: 16px
   display: flex
-  margin: 0 auto
-  max-width: 90vw
   aside
-    width: 260px
-    white-space: nowrap
+    width: 0px
+    transition-property: width
+    transition-duration: 5s
+    min-height: 75vh
+    width: max-content
+    + label
+      position: relative
+      left: 600px
   main
-    margin-left: 2rem
-    width: 80vw
-    height: 60vh
-    overflow-y: auto
-    background-color: rgba(256,256,256,0.75)
-    border: 1px solid #0000
-    border-radius: 3px
-    padding: 2rem
-    box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.4)
-    text-align: center 
-    img
-      border-radius: 3px
+    min-height: 70vh
+    width: 100%
+    text-align: center
+    a
+      font-style: italic
+      &:link
+          color: white
+          text-decoration: none
+      &:visited
+          color: white
+          text-decoration: none
+      &:hover
+          color: white
+          text-decoration: none
+      &:active
+          color: white
+          text-decoration: none
+  .logoMenu
+    position: fixed
+    z-index: 1
+    padding: 5px
+    left: 0px
+    top: 50vh
+  #menuCheckbox
+    ~ .logoMenu
+      margin-left: 293px
+    &:checked 
+      ~ aside
+        display: none
+      ~ main
+        margin-left: 0px
+      ~ .logoMenu
+        margin-left: 0px
+   
+@media (max-width: 769px)
+  .container
+    header
+      width: none
+      position: unset
+    aside
+      position: unset
+    .logoMenu
+      left: 0px
+      margin-left: 0px!important
+    #menuCheckbox
+      ~ main
+        display: block
+        margin-left: 0px
+      ~ aside
+        display: none
+      &:checked
+        ~ main
+          display: none
+        ~ aside
+          display: block
+        ~ .logoMenu
+          right:0px
+          left: unset
