@@ -7,17 +7,23 @@ import "./header.sass"
 
 const Header = ({ siteTitle }) => (
   <header>
-
-    <div>
       <Link to="/">
         <StaticImage
               src="../images/logo.png"
-              placeholder="blurred"
+              placeholder="blurred" 
               formats={["AUTO", "WEBP"]}
-              alt="A Gatsby astronaut"
+              alt="Logo de phantasy star chronique"
         />
       </Link>
-    </div>
+      <a href="https://discord.com/invite/48H8Fq8" className= "logoDiscord" target="_blank" rel="noreferrer">
+        <StaticImage
+              src="../images/discord.png"
+              placeholder="blurred" 
+              formats={["AUTO", "WEBP"]}
+              alt="Logo discord"
+              width= "64"
+        />
+      </a>
   </header>
 )
 
