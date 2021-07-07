@@ -1,6 +1,7 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { Link, useStaticQuery, graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 
 import "./menu.sass"
@@ -18,6 +19,15 @@ const Menu = ({ siteTitle }) => {
           frontmatter {
             game
             title
+            logoGame{
+              childImageSharp {
+                gatsbyImageData(
+                    placeholder: BLURRED
+                    width: 250
+                    formats: [AUTO, WEBP, AVIF]
+                )
+              }
+            }
           }
           fields {
             slug
@@ -40,7 +50,7 @@ const Menu = ({ siteTitle }) => {
           
           if (section.frontmatter.game === categorie.frontmatter.game) {
             return(
-            <li>
+            <li >
               <Link to={"/"+categorie.fields.slug}>
                 {categorie.frontmatter.title}
               </Link>
@@ -51,8 +61,22 @@ const Menu = ({ siteTitle }) => {
     
       oldMenu = newMenu
       
-      return <li className="has-sub">
-        <label htmlFor={section.id}>{section.frontmatter.game}</label><input id={section.id} name="menu" type="radio" />
+      const logoGame = section.frontmatter.logoGame? getImage(section.frontmatter.logoGame): false
+
+
+      return <li className="has-sub ">
+        <div className="button-default button-slanted">
+          <label htmlFor={section.id} className="button-slanted-content">
+            {
+        
+              logoGame?
+                <GatsbyImage image={logoGame} alt={`Logo ${section.frontmatter.game}` } />
+                :section.frontmatter.game
+        
+            }
+          </label>
+        </div>
+        <input id={section.id} name="menu" type="radio" />
         <ul className="sub">
           {submenu}
         </ul>
@@ -60,10 +84,12 @@ const Menu = ({ siteTitle }) => {
     }
   })
 
-  return( 
+  return(
+    <>
     <ul className="accordion">
       {menu}
     </ul>
+    </>
   )
 }
 
