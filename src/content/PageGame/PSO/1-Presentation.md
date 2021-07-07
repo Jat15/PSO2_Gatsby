@@ -2,7 +2,11 @@
 
 game: Phantasy Star Online
 
+route: [Phantasy Star Online]
+
 dateReleaseGame: 2000-12-21
+
+logoGame: ../../../images/logo_PSOE12.webp
 
 type: PageGame
 
