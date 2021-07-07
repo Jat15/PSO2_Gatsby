@@ -6,7 +6,7 @@ type: PageGame
 
 layout: Normal
 
-orderSubMenu: 1
+order: 1
 
 title: Présentation 
 

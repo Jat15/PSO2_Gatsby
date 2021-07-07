@@ -6,7 +6,7 @@ type: PageGame
 
 layout: Episode
 
-orderSubMenu: 2
+order: 2
 
 title: Episode
 

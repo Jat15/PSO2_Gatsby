@@ -1,6 +1,6 @@
 ---
 
-type: Onglet
+type: Tab
 
 title:  Phantasy Star Online
 
