@@ -9,47 +9,54 @@ import "./menu.sass"
 const Menu = ({ siteTitle }) => {
 
   const data = useStaticQuery(graphql`
-    query{
-    allTab(
-      sort: {fields: [markdownPage___frontmatter___dateReleaseGame], order: [DESC]}
-    ) {
-      nodes {
-        id
-        markdownPage {
-          frontmatter {
-            title
-            date
-            logo{
-              childImageSharp {
-                gatsbyImageData(
-                    placeholder: BLURRED
-                    width: 250
-                    formats: [AUTO, WEBP, AVIF]
-                )
+      query{
+      allTab(
+        sort: {fields: [markdownPage___frontmatter___dateReleaseGame], order: [DESC]}
+      ) {
+        nodes {
+          id
+          markdownPage {
+            frontmatter {
+              title
+              logo{
+                childImageSharp {
+                  gatsbyImageData(
+                      placeholder: BLURRED
+                      width: 250
+                      formats: [AUTO, WEBP, AVIF]
+                  )
+                }
               }
             }
           }
-        }
-        subTabs {
-          ...test
+          subTabs {
+            ...test
+          }
         }
       }
     }
-  }
 
-  fragment test on SubTab {
-    slug
-    markdownPage {
-      frontmatter {
-        title
+    fragment test on SubTab {
+      slug
+      markdownPage {
+        frontmatter {
+          title
+          order
+        }
       }
     }
-  }
   `)
   
 
   const menu = data.allTab.nodes.map( tab => {
 
+
+    // Trie les submenu
+    tab.subTabs.sort(function (a, b) {
+      return a.markdownPage.frontmatter.order - b.markdownPage.frontmatter.order;
+    });
+
+    //création des submenu
     const submenu = tab.subTabs.map( subTab =>
       <li>
         <Link to={"/"+ subTab.slug}>
@@ -65,7 +72,7 @@ const Menu = ({ siteTitle }) => {
           {
             logo?
               <GatsbyImage image={logo} alt={`Logo ${tab.markdownPage.frontmatter.title}` } />
-              :tab.markdownPage.frontmatter.title
+              :<p className="labelText">{tab.markdownPage.frontmatter.title}</p>
       
           }
         </label>
