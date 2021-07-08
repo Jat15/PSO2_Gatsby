@@ -9,7 +9,7 @@ const Header = ({ siteTitle }) => (
   <header>
       <Link to="/">
         <StaticImage
-              src="../images/logo.png"
+              src="../images/logo/chronique.png"
               placeholder="blurred" 
               formats={["AUTO", "WEBP"]}
               alt="Logo de phantasy star chronique"

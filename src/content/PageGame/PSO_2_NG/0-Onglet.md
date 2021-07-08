@@ -6,6 +6,6 @@ title: Phantasy Star Online 2 New Genesis
 
 dateReleaseGame: 2021-02-09
 
-logo: ../../../images/Logo_PSO2NG.png
+logo: ../../../images/logo/PSO2NG.png
 
 ---
