@@ -39,6 +39,7 @@ const Menu = ({ siteTitle }) => {
     fragment test on SubTab {
       slug
       markdownPage {
+        id
         frontmatter {
           title
           order
@@ -58,7 +59,7 @@ const Menu = ({ siteTitle }) => {
 
     //création des submenu
     const submenu = tab.subTabs.map( subTab =>
-      <li>
+      <li key={subTab.markdownPage.id}>
         <Link to={"/"+ subTab.slug}>
           {subTab.markdownPage.frontmatter.title}
         </Link>
@@ -66,9 +67,9 @@ const Menu = ({ siteTitle }) => {
     )
     const logo = tab.markdownPage.frontmatter.logo ? getImage(tab.markdownPage.frontmatter.logo): false
 
-    return <li className="has-sub ">
-      <div className="button-default button-slanted">
-        <label htmlFor={tab.id} className="button-slanted-content">
+    return <li className="has-sub" key={tab.id}>
+
+        <label htmlFor={tab.id}>
           {
             logo?
               <GatsbyImage image={logo} alt={`Logo ${tab.markdownPage.frontmatter.title}` } />
@@ -76,7 +77,7 @@ const Menu = ({ siteTitle }) => {
       
           }
         </label>
-      </div>
+
       <input id={tab.id} name="menu" type="radio" />
       <ul className="sub">
         {submenu}
