@@ -6,7 +6,7 @@ body
     border: 6px double #00e1ff
     background-color: rgba(0,52,89,0.75)
     border-radius: 20px
-    padding: 5px
+    padding: 3px
     box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.4)
     flex-direction: column
     height: max-content
@@ -26,17 +26,14 @@ body
   aside
     margin-right: 10px
     min-height: 75vh
-    width: max-content
-    + label
-      position: relative
-      left: 600px
   main
     display: flex
     flex-direction: column
     justify-content: space-between
     margin: 10px
-    min-height: 70vh
     width: 100%
+    min-height: 75vh
+    height: max-content
     text-align: center
     a
       font-style: italic
@@ -53,16 +50,9 @@ body
           color: white
           text-decoration: none
   #menuCheckbox
-    ~ .logoMenu
-      margin-left: 330px
     &:checked 
       ~ aside
         display: none
-      ~ main
-        margin-left: 0px
-      ~ .logoMenu
-        margin-left: 0px
-   
 @media (max-width: 769px)
   .container
     header
@@ -73,7 +63,6 @@ body
     #menuCheckbox
       ~ main
         display: flex
-        margin-left: 10px
       ~ aside
         display: none
       &:checked
