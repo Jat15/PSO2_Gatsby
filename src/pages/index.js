@@ -28,7 +28,7 @@ const IndexPage = ({data}) => {
     return (
         <Layout>
             <Seo title="Phantasy Star Chronique - Les Sortie" />
-            <div className="borderCian aLaUne">
+            <div className="borderCian aLaUne" key={aLaUne.id}>
                 <h1>{aLaUne.frontmatter.title}</h1>
                 <GatsbyImage image={aLaUneImage} className="borderCian"  alt={`Bannière de l'article ${aLaUne.frontmatter.titre}` } />
                 <div>
@@ -75,6 +75,7 @@ export const query = graphql`
             skip: 1
         ) {
             nodes {
+                id
                 html
                 frontmatter {
                     title
