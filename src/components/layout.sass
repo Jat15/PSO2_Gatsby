@@ -2,27 +2,39 @@ body
   color: white
   min-height: 100vh
   margin:0px
+.shortcutBar
+    border: 6px double #00e1ff
+    background-color: rgba(0,52,89,0.75)
+    border-radius: 20px
+    padding: 5px
+    box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.4)
+    flex-direction: column
+    height: max-content
+    width: max-content
+    position: sticky
+    margin-top: 10px
+    top: 10px
+    *
+      margin: 2px
 .imageBackground
   min-height: 100vh
   padding: 8px
-
-
-
-
 .container
   max-width: 100%
   margin: 16px
   display: flex
   aside
-    width: 0px
-    transition-property: width
-    transition-duration: 5s
+    margin-right: 10px
     min-height: 75vh
     width: max-content
     + label
       position: relative
       left: 600px
   main
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    margin: 10px
     min-height: 70vh
     width: 100%
     text-align: center
@@ -40,15 +52,9 @@ body
       &:active
           color: white
           text-decoration: none
-  .logoMenu
-    position: fixed
-    z-index: 1
-    padding: 5px
-    left: 0px
-    top: 50vh
   #menuCheckbox
     ~ .logoMenu
-      margin-left: 293px
+      margin-left: 330px
     &:checked 
       ~ aside
         display: none
@@ -63,14 +69,11 @@ body
       width: none
       position: unset
     aside
-      position: unset
-    .logoMenu
-      left: 0px
-      margin-left: 0px!important
+      flex-basis: 100%
     #menuCheckbox
       ~ main
-        display: block
-        margin-left: 0px
+        display: flex
+        margin-left: 10px
       ~ aside
         display: none
       &:checked
@@ -78,6 +81,3 @@ body
           display: none
         ~ aside
           display: block
-        ~ .logoMenu
-          right:0px
-          left: unset

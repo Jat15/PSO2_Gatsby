@@ -14,6 +14,8 @@ import { BgImage } from 'gbimage-bridge';
 
 import Header from "./header"
 import Menu from "./menu"
+import Footer from "./footer"
+
 import "./layout.sass"
 
 
@@ -57,23 +59,34 @@ const Layout = ({ children }) => {
         className="container" 
       >
         <input type="checkbox" id="menuCheckbox" className="displayNone"/>
-        <label for="menuCheckbox" className="windowLayout logoMenu ">
-          <StaticImage
-            src="../images/icon_menu.png"
-            placeholder="blurred"
-            width="32"
-            formats={["AUTO", "WEBP", "AVIF"]}
-            alt="A Gatsby astronaut"
-          />
-        </label>
         <aside><Menu /></aside>
+        <div className="shortcutBar">
+          <label htmlFor="menuCheckbox" className="logoMenu ">
+            <StaticImage
+              src={"../images/icon_menu.png"}
+              placeholder="blurred"
+              formats={["AUTO", "WEBP", "AVIF"]}
+              alt="Logo menu"
+              width={32}
+              layout="fixed"
+            />
+          </label>
+          <a href="https://discord.com/invite/48H8Fq8" className= "logoDiscord" target="_blank" rel="noreferrer">
+            <StaticImage
+                src="../images/discord.png"
+                placeholder="blurred" 
+                formats={["AUTO", "WEBP"]}
+                alt="Logo discord"
+                width={32}
+                layout="fixed"  
+            />
+          </a>
+        </div>
         <main className="windowLayout">
-          {children}
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.com">Gatsby</a>
-          </footer>
+            <section>
+              {children}
+            </section>
+            <Footer/>
         </main>
       </div>
     </BgImage>
