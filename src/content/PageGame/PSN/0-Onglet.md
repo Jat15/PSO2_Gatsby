@@ -4,9 +4,9 @@ type: Tab
 
 title: Phantasy Star Nova
 
-dateReleaseGame: 2009-12-03
+dateReleaseGame: 2014-11-27
 
-#logo: ../../../images/logo_PSU.webp
+logo: ../../../images/logo/PSN.png
 
 
 ---
