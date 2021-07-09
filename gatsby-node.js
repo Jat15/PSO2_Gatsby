@@ -11,7 +11,7 @@ const path = require("path")
 
 
 exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
-    const { createNodeField } = actions
+
     if (node.internal.type === `MarkdownRemark` && node.frontmatter.type === `PageGame`) {
 
       const slugify = str =>
@@ -68,4 +68,27 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
       }
     `
     createTypes(typeDefs)
+  }
+
+  exports.createPages = async ({ graphql, actions }) => {
+    const { createPage } = actions
+    const result = await graphql(`
+      query {
+        allSubTab {
+          nodes {
+            slug
+          }
+        }
+      }
+    `)
+
+    result.data.allSubTab.nodes.forEach(( node ) => {
+      createPage({
+        path: node.slug,
+        component: path.resolve(`./src/templates/normal.js`),
+        context: {
+          slug: node.slug,
+        },
+      })
+    })
   }
