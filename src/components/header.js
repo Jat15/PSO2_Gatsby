@@ -15,15 +15,6 @@ const Header = ({ siteTitle }) => (
               alt="Logo de phantasy star chronique"
         />
       </Link>
-      <a href="https://discord.com/invite/48H8Fq8" className= "logoDiscord" target="_blank" rel="noreferrer">
-        <StaticImage
-              src="../images/discord.png"
-              placeholder="blurred" 
-              formats={["AUTO", "WEBP"]}
-              alt="Logo discord"
-              width= "64"
-        />
-      </a>
   </header>
 )
 
