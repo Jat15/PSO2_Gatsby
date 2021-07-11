@@ -1,44 +1,22 @@
 import * as React from "react"
 import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Articles from "../components/articles"
 import "./index.sass"
 
 
 const IndexPage = ({data}) => {
-    const listArticle = data.articles.nodes.map( objet => {
-        const image = getImage(objet.frontmatter.img)
-
-        return <div className="cardArticle borderCian" key={objet.id} >
-            <h1>{objet.frontmatter.title}</h1>
-            <GatsbyImage image={image} className="borderCian" alt={`Bannière de l'article ${objet.frontmatter.titre}` } />
-            <div>
-                <div
-                    dangerouslySetInnerHTML={{ __html: objet.html }}
-                />
-            </div>
-        </div>
-    })
-
-    const aLaUne = data.aLaUne.nodes[0]
-    const aLaUneImage = getImage(aLaUne.frontmatter.img)
 
     return (
         <Layout>
             <Seo title="Phantasy Star Chronique - Les Sortie" />
-            <div className="borderCian aLaUne" key={aLaUne.id}>
-                <h1>{aLaUne.frontmatter.title}</h1>
-                <GatsbyImage image={aLaUneImage} className="borderCian"  alt={`Bannière de l'article ${aLaUne.frontmatter.titre}` } />
-                <div>
-                    <div
-                        dangerouslySetInnerHTML={{ __html: aLaUne.html }}
-                    />
-                </div>
-            </div>
-            <div className="containerArticles">
-                {listArticle}
+            <Articles data={data.aLaUne} style="first" />
+            <div
+                className="containerArticles"
+            >
+                <Articles data={data.articles} style="article" />
             </div>
         </Layout>
     )

@@ -1,28 +1,18 @@
+@use "./../styles/variables" as var
+    
+.displayNone
+    display: none   
+.windowLayout
+    border: var.$border-double
+    background-color: var.$background-primary-color
+    border-radius: var.$border-radius
+    padding: 25px
+    box-shadow: var.$shadow-box
 .containerArticles
     display: flex
     flex-wrap: wrap
     justify-content: space-around
-.cardArticle
-    display: flex
-    flex-direction: column
-    max-width: 344px
-    padding: 5px
-    margin: 10px
-    border: 1px rgba(0,0,0,0.53)
-.displayNone
-    display: none
-.windowLayout
-    border: 6px double #00e1ff
-    background-color: rgba(0,52,89,0.75)
-    border-radius: 20px
-    padding: 25px
-    box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.4)
-.aLaUne
-    max-width: max-content
-    margin-left: auto
-    margin-right: auto
-
 .borderCian
-    border: 1px solid #00e1ff      
-    border-radius: 10px
-    box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.4)
+    border: 1px solid var.$border-color
+    border-radius: var.$border-radius
+    box-shadow: var.$shadow-box
