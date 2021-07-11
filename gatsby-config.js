@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `Phantasy Star Chronique`,
-    description: `Un site`,
-    author: `Jat`,
+    description: `Site d'un fan de la licence phantasy star`,
+    author: `DevilRoy & Jat`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -54,7 +54,7 @@ module.exports = {
               maxWidth: 590,
               disableBgImageOnAlpha: false,
               withWebp: true,
-              withAvif: true,
+              //withAvif: true,
               disableBgImage: true,
               backgroundColor: `transparent`,
 
