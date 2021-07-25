@@ -6,14 +6,16 @@
 
 // You can delete this file if you're not using it
 
+
 const path = require("path")
-
-
 
 exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
 
-    if (node.internal.type === `MarkdownRemark` && node.frontmatter.type === `PageGame`) {
+    if(node.internal.type !== `MarkdownRemark`) {
+      return
+    }
 
+    if (node.frontmatter.type === `PageGame`) {
       const slugify = str =>
         str
             .toLowerCase()
@@ -35,9 +37,7 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
         })
 
 
-    }
-
-    if (node.internal.type === "MarkdownRemark" && node.frontmatter.type === "Tab") {
+    } else if (node.frontmatter.type === "Tab") {
       actions.createNode({
         id: createNodeId(node.frontmatter.title),
         markdownId: node.id,
@@ -46,6 +46,8 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
           contentDigest: node.internal.contentDigest,
         },
       })
+    } else {
+      return
     }
 
   }
