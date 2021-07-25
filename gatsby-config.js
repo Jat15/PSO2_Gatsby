@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: `/gatsby_publish`,
+  //pathPrefix: `/gatsby_publish`,
   siteMetadata: {
     title: `Phantasy Star Chronique`,
     description: `Site d'un fan de la licence phantasy star`,
