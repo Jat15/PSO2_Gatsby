@@ -42,19 +42,12 @@ const Layout = ({ children }) => {
     }
   `)
 
-  const style = {
-    // Defaults are overwrite-able by setting one or each of the following:
-    backgroundSize: 'cover',
-    backgroundAttachment: 'fixed'
-  }
-
   const pluginImage = getImage(data.background)
 
   return (
     <BgImage
       image={pluginImage}
       className="imageBackground"
-      style={style}
     >
       <Header
         siteTitle={data.site.siteMetadata?.title || `Title`}
