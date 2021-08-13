@@ -45,10 +45,12 @@ const Layout = ({ children }) => {
   const pluginImage = getImage(data.background)
 
   return (
-    <BgImage
-      image={pluginImage}
+    <div
       className="imageBackground"
     >
+      <div id='stars'></div>
+      <div id='stars2'></div>
+      <div id='stars3'></div>
       <Header
         siteTitle={data.site.siteMetadata?.title || `Title`}
       />
@@ -73,7 +75,7 @@ const Layout = ({ children }) => {
             <Footer/>
         </main>
       </div>
-    </BgImage>
+    </div>
   )
 }
 
